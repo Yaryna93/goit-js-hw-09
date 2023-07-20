@@ -44,20 +44,6 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-// 
-// 
-// const {days, hours, minutes, seconds};
-//   selectors.days.textContent = addLeadingZero(days);
-//   selectors.hours.textContent = addLeadingZero(hours);
-//   selectors.minutes.textContent = addLeadingZero(minutes);
-//   selectors.seconds.textContent = addLeadingZero(seconds);
-
-//   
-
-
-// function addLeadingZero(value){
-//   return value.toString().padStart(2, '0');
-// };
 
 function onButtonClick(){
 const timer = setInterval(()=> {
