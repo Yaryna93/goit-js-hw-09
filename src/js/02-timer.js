@@ -82,4 +82,6 @@ if (difference <= 0){
 }, 1000);
 };
 
-selectors.button.disabled = true;
+function addLeadingZero(value){
+    return value.toString().padStart(2, '0');
+  };
