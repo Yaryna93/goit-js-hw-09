@@ -1,15 +1,15 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
 
+
 const selectors = {
-  button:document.querySelector('.data-start'),
-  days:document.querySelector('.data-days'),
-  hours:document.querySelector('.data-hours'),
-  minutes:document.querySelector('.data-minutes'),
-  seconds:document.querySelector('.data-seconds'),
+  button:document.querySelector('[data-start]'),
+  days:document.querySelector('[data-days]'),
+  hours:document.querySelector('[data-hours]'),
+  minutes:document.querySelector('[data-minutes]'),
+  seconds:document.querySelector('[data-seconds]'),
 }
 
-const label = document.querySelectorAll('.timer .label');
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -17,18 +17,21 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     const selectedDate = selectedDates[0];
-    if(selectedDate <= newDate()){
+    if(selectedDate <= Date.now()){
       window.alert("Please choose a date in the future");
-      button.disabled = true;
+      selectors.button.disabled = true;
     } else {
-      button.addEventListener('click', onButtonClick);
-      button.disable = false;
+      selectors.button.addEventListener('click', onButtonClick);
+      selectors.button.disabled = false;
 
   }
 },
 };
-
+selectors.button.addEventListener('click', onButtonClick);
 const dateFlatpickr = flatpickr('#datetime-picker', options);
+
+
+const label = document.querySelectorAll('.timer .label');
 
 function convertMs(ms) {
   const second = 1000;
@@ -43,27 +46,38 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-
+selectors.button.disabled = true;
 
 function onButtonClick(){
 const timer = setInterval(()=> {
 const currentDate = new Date();
-const selectedDate = datetimePicker.selectedDates[0];
+const selectedDate = dateFlatpickr.selectedDates[0];
 const difference = selectedDate.getTime() - currentDate;
+const { days, hours, minutes, seconds } = convertMs(difference);
+
+selectors.days.textContent = addLeadingZero(days);
+selectors.hours.textContent = addLeadingZero(hours);
+selectors.minutes.textContent = addLeadingZero(minutes);
+selectors.seconds.textContent = addLeadingZero(seconds);
+
+
 
 if (difference <= 0){
       clearInterval(timer);
-   
+      selectors.days.textContent = '00';
+      selectors.hours.textContent = '00';
+      selectors.minutes.textContent = '00';
+      selectors.seconds.textContent = '00';
   return;
-    } else {
-      if (difference => 0){
-        const { days, hours, minutes, seconds }  = convertMs(difference);
-          selectors.days.textContent = addLeadingZero(days);
-          selectors.hours.textContent = addLeadingZero(hours);
-          selectors.minutes.textContent = addLeadingZero(minutes);
-          selectors.seconds.textContent = addLeadingZero(seconds);
+    // } else {
+    //   if (difference => 0){
+    //     const { days, hours, minutes, seconds }  = convertMs(difference);
+    //       selectors.days.textContent = '00';
+    //       selectors.hours.textContent = '00';
+    //       selectors.minutes.textContent = '00';
+    //       selectors.seconds.textContent = '00';
   
-      }
+    //   }
     }
 }, 1000);
 };
@@ -71,3 +85,4 @@ if (difference <= 0){
 function addLeadingZero(value){
     return value.toString().padStart(2, '0');
   };
+

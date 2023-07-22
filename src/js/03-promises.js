@@ -12,7 +12,7 @@ function createPromise(position, delay) {
     }, delay);
   });
 }
-const form = document.querySelector('form');
+const form = document.querySelector('.form');
 const inputDelay = document.querySelector('input[name="delay"]');
 const inputStep = document.querySelector('input[name="step"]');
 const inputAmount = document.querySelector('input[name="amount"]');
@@ -21,13 +21,13 @@ const button = document.querySelector('button');
 form.addEventListener('submit', formSubmit);
 function formSubmit(event){
   event.preventDefault();
-  const delay = parseInt(inputDelay.value);
+  const firstDelay = parseInt(inputDelay.value);
   const step = parseInt(inputStep.value);
   const amount = parseInt(inputAmount.value);
 
-  for(let i=0; i<amount; i++){
+  for(let i=0; i<=amount; i++){
     const position = i+1;
-    const delay = delay+i*step;
+    const delay = firstDelay+i*step;
 
     createPromise(position, delay)
     .then(({position, delay})=>{

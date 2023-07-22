@@ -12,7 +12,7 @@ let timerId = null;
 startButton.addEventListener('click', start);
 function start(){
   startButton.disabled = true;
-  stopButton.disabled = false;
+ 
 
 timerId = setInterval(()=> {bodyColor.style.backgroundColor = getRandomHexColor()}, 1000)
 }
