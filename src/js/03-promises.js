@@ -25,7 +25,7 @@ function formSubmit(event){
   const step = parseInt(inputStep.value);
   const amount = parseInt(inputAmount.value);
 
-  for(let i=0; i<=amount; i++){
+  for(let i=0; i<amount; i++){
     const position = i+1;
     const delay = firstDelay+i*step;
 
